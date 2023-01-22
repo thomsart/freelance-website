@@ -1,0 +1,108 @@
+.big-projects-bloc {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 90%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.big-project {
+    background-color: var(--color-body);
+    height: 30rem;
+    width: 25rem;
+    margin: auto;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    .big-project {
+        width: 15rem;
+    }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1200px) {
+    /*style petites-moyennes tablettes */
+    .big-project {
+        width: 25rem;
+    }
+}
+
+.big-project:hover {
+    transform: scale(1.15);
+    transition-duration: 1s;
+}
+
+@media only screen and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    .big-project:hover {
+        transform: none;
+    }
+}
+
+.big-project h2 {
+    margin-left: 5%;
+}
+
+.big-project:hover h2 {
+    color: var(--color-h2-hover);
+    text-shadow: 0 0 70px white;
+}
+
+#big-project-server {
+    background-image: url('unix.png');
+    background-size: 180px;
+}
+
+#big-project-back {
+    background-image: url('python.png');
+    background-size: 210px;
+}
+
+#big-project-front {
+    background-image: url('responsive.png');
+    background-size: 210px;
+}
+
+#big-project-server, #big-project-back, #big-project-front {
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
+
+}
+
+#big-project-server:hover, #big-project-back:hover, #big-project-front:hover {
+    background-blend-mode: luminosity;
+    background-size: 30%;
+    background-position-x: 150px;
+    background-position-y: 260px;
+    transition-duration: 2s;
+}
+
+.big-project-text-div {
+    max-width: 100%;
+    line-height: 2rem;
+}
+
+#big-project-text-1, #big-project-text-3, #big-project-text-5 {
+    display: flex;
+    transform: translateX(-400px);
+}
+
+#big-project-text-2, #big-project-text-4 {
+    display: flex;
+    transform: translateX(400px);
+}
+
+.big-project-icon-div {
+    height: 2.5rem;
+    width: auto;
+}
+
+.big-project-icon {
+    height: 100%;
+    width: auto;
+}
