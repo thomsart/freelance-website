@@ -1,13 +1,14 @@
 :root {
     /* Color palette */
-    --color-softBlack: rgb(60, 60, 60);
+    --color-screen: rgb(61, 41, 47);
     --color-font: rgb(80, 80, 80);
+    --color-softBlack: rgb(70, 70, 70);
     --color-h2: rgb(100, 100, 100);
     --color-h2-hover: rgb(136, 64, 218);
     --color-body: whitesmoke;
-    --color-skills: rgb(190, 184, 199);
+    --color-skills: rgb(191, 165, 233);
     --color-big-projects: rgb(189, 190, 154);
-    --color-small-projects: rgb(202, 222, 240);
+    --color-small-projects: rgb(236, 233, 204);
     --color-footer: gainsboro;
     /* Font */
     --font-ref: 4.5rem;
@@ -25,7 +26,7 @@
 @media only screen and (max-width: 799px) {
     /*style smartphones et petites tablettes en portrait*/
     :root {
-        --font-ref: 3rem;
+        --font-ref: 2.5rem;
     }
 }
 
@@ -37,7 +38,7 @@
 }
 
 html {
-    background-color: var(--color-softBlack);
+    background-color: var(--color-screen);
     width: 100%;
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -45,12 +46,12 @@ html {
 
 @font-face {
     font-family: 'title';
-    src: url("CormorantGaramond-Medium.ttf");
+    src: url("RuslanDisplay-Regular.ttf");
 }
 
 @font-face {
     font-family: 'text';
-    src: url("Marmelad-Regular.ttf");
+    src: url("StardosStencil-Bold.ttf");
 }
 
 h1 {
@@ -96,15 +97,12 @@ h1 {
 
 h2 {
     color: var(--color-h2);
+    margin-left: 5%;
 }
 
-h2:hover {
+nav h2:hover {
     color: var(--color-h2-hover);
     text-shadow: 0 0 70px white;
-}
-
-h3 {
-    margin-left: 5%;
 }
 
 p {
@@ -113,10 +111,6 @@ p {
 
 a {
     text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
 
 hr {
@@ -182,9 +176,9 @@ body {
 /* ################################################ */
 
 nav {
-    border:  solid var(--color-softBlack);
+    border:  solid var(--color-screen);
     position: fixed;
-    background-color: var(--color-softBlack);
+    background-color: var(--color-screen);
     display: flex;
     flex-wrap: wrap;
     width: 80%;
@@ -267,4 +261,8 @@ footer {
     width: 100%;
     border-radius: 10px;
     text-align: center;
+}
+
+.footer-a:hover {
+    text-decoration: underline;
 }

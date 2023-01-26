@@ -24,17 +24,11 @@ article {
     }
 }
 
-@media only screen and (min-width: 800px) and (max-width: 1200px) {
-    /*style petites-moyennes tablettes */
-    article {
-    }
-}
-
 article.enter {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    outline: 2px solid var(--color-h2);
+    outline: 2px solid var(--color-softBlack);
     outline-offset: -10px;
     border-radius:  20px;
     text-align: center;
@@ -73,7 +67,7 @@ article img {
 }
 
 article.enter img {
-    transform: scale(0.8) translateX(-80px) translateY(-110px);
+    transform: scale(0.8) translateX(-50px) translateY(-110px);
     -webkit-transition: transform 1s ease-in-out;
 }
 

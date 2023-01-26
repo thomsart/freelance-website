@@ -2,9 +2,7 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    width: 90%;
     margin-top: 5%;
-    margin-bottom: 5%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -12,7 +10,7 @@
 .big-project {
     background-color: var(--color-body);
     height: 30rem;
-    width: 25rem;
+    width: 20rem;
     margin: auto;
     overflow: hidden;
 }
@@ -76,9 +74,9 @@
 
 #big-project-server:hover, #big-project-back:hover, #big-project-front:hover {
     background-blend-mode: luminosity;
-    background-size: 30%;
+    background-size: 0%;
     background-position-x: 150px;
-    background-position-y: 260px;
+    background-position-y: 240px;
     transition-duration: 2s;
 }
 
