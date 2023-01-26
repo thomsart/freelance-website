@@ -89,7 +89,7 @@ let processNb = document.querySelectorAll('.slide-nb');
 let i = 0;
 processNb[i].classList.add('revealed');
 function displayNum () {
-        if (i == 5) {i = -1;}
+        if (i == 4) {i = -1;}
         i += 1;
         processNb[i].classList.add('revealed');
 }

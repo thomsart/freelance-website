@@ -10,7 +10,7 @@
     --color-small-projects: rgb(202, 222, 240);
     --color-footer: gainsboro;
     /* Font */
-    --font-ref: 5rem;
+    --font-ref: 4.5rem;
     --font-1: calc(var(--font-ref) * 1);
     --font-2: calc(var(--font-ref) * 0.7);
     --font-3: calc(var(--font-ref) * 0.6);
@@ -19,7 +19,21 @@
     --font-6: calc(var(--font-ref) * 0.3);
     /* Size palette */
     --size-carousel: 400px;
-    --nb-element-carousel: 6;
+    --nb-element-carousel: 5;
+}
+
+@media only screen and (max-width: 799px) {
+    /*style smartphones et petites tablettes en portrait*/
+    :root {
+        --font-ref: 3rem;
+    }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1200px) {
+    /*style petites-moyennes tablettes */
+    :root {
+        --font-ref: 4rem;
+    }
 }
 
 html {
@@ -124,7 +138,7 @@ hr:after {
 
 #arrow {
     position: fixed;
-    right: 50%;
+    right: 11%;
     bottom: 30px;
 }
 
@@ -149,28 +163,12 @@ hr:after {
 }
 
 /* ################################################ */
-
-@media only screen and (max-width: 799px) {
-    /*style smartphones et petites tablettes en portrait*/
-    :root {
-        --font-ref: 3rem;
-    }
-}
-
-@media only screen and (min-width: 800px) and (max-width: 1200px) {
-    /*style petites-moyennes tablettes */
-    :root {
-        --font-ref: 4rem;
-    }
-}
-
-/* ################################################ */
 /* ################## BODY ######################## */
 /* ################################################ */
 
 body {
     background-color: var(--color-body);
-    width: 98%;
+    width: 80%;
     margin-top: 8rem;
     margin-left: auto;
     margin-right: auto;
@@ -184,11 +182,12 @@ body {
 /* ################################################ */
 
 nav {
+    border:  solid var(--color-softBlack);
     position: fixed;
     background-color: var(--color-softBlack);
     display: flex;
     flex-wrap: wrap;
-    width: 98%;
+    width: 80%;
     top: 0px;
     z-index: 10000;
     line-height: 1rem;
@@ -266,15 +265,6 @@ nav {
 footer {
     background-color: var(--color-footer);
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: space-around;
     border-radius: 10px;
-}
-
-#footer-services, #footer-hours, #footer-contact, #footer-info {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
+    text-align: center;
 }
