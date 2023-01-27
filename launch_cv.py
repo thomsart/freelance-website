@@ -19,11 +19,11 @@ def return_static(filename: str):
     elif str(filename) in js:
         return static_file(filename, root=js_root)
 
-    elif str(filename) in font_serif:
-        return static_file(filename, root=font_serif_root)
+    elif str(filename) in font_title:
+        return static_file(filename, root=font_title_root)
     
-    elif str(filename) in font_noserif:
-        return static_file(filename, root=font_noserif_root)
+    elif str(filename) in font_text:
+        return static_file(filename, root=font_text_root)
 
     elif str(filename) in icon:
         return static_file(filename, root=icon_root)

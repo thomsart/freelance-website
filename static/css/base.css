@@ -46,7 +46,7 @@ html {
 
 @font-face {
     font-family: 'title';
-    src: url("RuslanDisplay-Regular.ttf");
+    src: url("FrederickatheGreat-Regular.ttf");
 }
 
 @font-face {
@@ -201,7 +201,7 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    height: 8rem;
+    height: 7rem;
 }
 
 #nav-menu {
