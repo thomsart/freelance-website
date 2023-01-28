@@ -56,12 +56,12 @@
 .slide-nb {
     position: absolute;
     top: 10px;
-    left: 150px;
+    left: 100px;
     opacity: 0;
 }
 
 .slide-nb p {
-    font-size: 20rem;
+    font-size: 15rem;
     color: red;
 }
 
