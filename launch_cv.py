@@ -3,7 +3,7 @@
 
 This module is use to execute the server of the site www.thomsart.tech """
 
-from bottle import Bottle, route, static_file, template, run
+from bottle import Bottle, route, static_file, template, run, get, post
 
 from const import *
 
@@ -41,11 +41,33 @@ def home():
     return template('home', name=home)
 
 
+@app.route('/contact', method='GET')
+def contact():
+    """  """
+
+    return template('contact', name=contact)
+
+
+@app.route('/contact', method='POST')
+def contact():
+    """  """
+
+    return template('home', name=contact)
+
+
+@app.route('/blog')
+def blog():
+    """  """
+
+    return template('blog', name=blog)
+
+
 @app.route('/mentions_legales')
 def mentions_legales():
     """ The path to return the mentions legales template """
 
     return template('mentions_legales', name=mentions_legales)
+
 
 
 if __name__ == '__main__':
