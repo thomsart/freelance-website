@@ -3,7 +3,7 @@
 
 This module is use to execute the server of the site www.thomsart.tech """
 
-from bottle import Bottle, route, static_file, template, run, get, post
+from bottle import Bottle, route, static_file, template, run, get, post, request
 
 from const import *
 
@@ -51,6 +51,16 @@ def contact():
 @app.route('/contact', method='POST')
 def contact():
     """  """
+
+    email = request.forms.get('email')
+    job = request.forms.get('job')
+    link = request.forms.get('link')
+
+    print({
+        "email": email,
+        "job": job,
+        "link": link,
+    })
 
     return template('home', name=contact)
 
