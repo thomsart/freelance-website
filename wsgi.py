@@ -3,4 +3,4 @@
 
 This module launch the cv on ubuntu vps """
 
-import launch_cv
+import launch_dev

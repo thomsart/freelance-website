@@ -12,13 +12,13 @@
     <div class="space"></div>
 
     <h2>Contactez-moi</h2>
-
-    <form action="/contact" method="post">
+    <!-- action="/contact" method="post" -->
+    <form id="contactForm">
         <label for="email"><h6>Votre Email</h6></label>
-        <input name="email" type="text" maxlength="255">
+        <input name="email" type="text" maxlength="255" id="emailValue">
         <div class="space"></div>
         <label for="job"><h6>Votre demande</h6></label>
-        <textarea name="job" maxlength="255"></textarea>
+        <textarea name="job" maxlength="255" id="jobValue"></textarea>
         <div class="space"></div>
         <label for="link"><h6>Lien de votre projet (facultatif)</h6></label>
         <input name="link" maxlength="255">
@@ -27,5 +27,7 @@
     </form>
 
     <div class="space"></div>
+
+    <script src="form.js"></script>
 
 </html>

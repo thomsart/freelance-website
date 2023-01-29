@@ -1,3 +1,7 @@
+.space {
+    height: 1rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -22,10 +26,6 @@ h2, h6 {
     text-align: center;
 }
 
-.space {
-    height: 1rem;
-}
-
 input, textarea, button {
     border-radius: 10px;
     width: 30%;
@@ -46,4 +46,18 @@ input, textarea, button {
         width: 50%;
         margin-left: 25%;
     }
+}
+
+#emailValue.empty, #jobValue.empty {
+    border: solid red 1px;
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+    0% {transform: translateX(10px)}
+    20% {transform: translateX(-10px)}
+    40% {transform: translateX(10px)}
+    60% {transform: translateX(-10px)}
+    80% {transform: translateX(10px)}
+    100% {transform: translateX(0px)}
 }
