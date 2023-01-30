@@ -4,10 +4,6 @@ let job = document.getElementById("jobValue");
 
 form.addEventListener("submit", function(e) {
 
-
-    email.classList.remove('empty');
-    job.classList.remove('empty');
-
     if (email.value == "") {
         email.classList.add('empty');
     }
