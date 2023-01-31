@@ -100,7 +100,7 @@ h2 {
     margin-left: 5%;
 }
 
-nav h2:hover {
+.h2_hover:hover {
     color: var(--color-h2-hover);
     text-shadow: 0 0 70px white;
 }

@@ -9,10 +9,12 @@ form {
 
 input {
     height: 2rem;
+    padding-left: 10px;
 }
 
 textarea {
     height: 4rem;
+    padding: 10px;
 }
 
 label, button {

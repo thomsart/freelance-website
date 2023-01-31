@@ -3,10 +3,10 @@
 
 This module is use to execute the server of the site www.thomsart.tech """
 
-import smtplib, ssl
-import json
 
-from bottle import Bottle, route, static_file, template, run, get, post, request
+import smtplib, ssl
+
+from bottle import Bottle, route, static_file, template, run, get, post, request, response
 
 from const import *
 from credentials import *
@@ -44,55 +44,71 @@ def return_static(filename: str):
 def home():
     """ The path to return the home template """
 
-    return template('home', name=home)
+    return template('./html/home', name=home)
 
 
 @app.route('/contact', method='GET')
 def contact():
     """  """
 
-    return template('contact', name=contact)
+    return template('./html/contact', name=contact)
 
 
 @app.route('/contact', method='POST')
 def contact():
     """  """
 
-    client_email = request.forms.get('email')
-    job = request.forms.get('job')
-    link = request.forms.get('link')
+    client_email = str(request.forms.getunicode('email'))
+    job = str(request.forms.getunicode('job'))
+    link = str(request.forms.getunicode('link'))
 
     msg = f"""\n
         From: {client_email}\n
-        Job:  {job}\n
+        Job: {job}\n
         Link: {link}"""
 
+    msg = bytes(msg, 'utf-8')
     # on rentre les renseignements pris sur le site du fournisseur
     smtp_address = 'smtp.gmail.com'
     smtp_port = 465
-    # on crée la connexion
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
-        # connexion au compte
-        server.login(from_email_address, from_email_password)
-        # envoi du mail
-        server.sendmail(client_email, to_email, msg)
 
-    return template('home', name=contact)
+    try:
+        # print("##############")
+        # res = smtplib.SMTP.verify(client_email)
+        # print(res)
+        # print("##############")
+        # code, corp = smtplib.SMTP.verify(client_email)
+        # print(code)
+        # print(corp)
+        # print("##############")
+
+        # on crée la connexion
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
+            # connexion au compte
+            server.login(from_email_address, from_email_password)
+            # envoi du mail
+            server.sendmail(client_email, to_email, msg)
+
+        return template('./html/home', name=home) 
+
+    except:
+
+        return template('./html/error')
 
 
 @app.route('/blog')
 def blog():
     """  """
 
-    return template('blog', name=blog)
+    return template('./html/blog', name=blog)
 
 
 @app.route('/mentions_legales')
 def mentions_legales():
     """ The path to return the mentions legales template """
 
-    return template('mentions_legales', name=mentions_legales)
+    return template('./html/mentions_legales', name=mentions_legales)
 
 
 
