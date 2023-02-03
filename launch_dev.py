@@ -73,24 +73,17 @@ def contact():
     smtp_port = 465
 
     try:
-        # print("##############")
-        # res = smtplib.SMTP.verify(client_email)
-        # print(res)
-        # print("##############")
-        # code, corp = smtplib.SMTP.verify(client_email)
-        # print(code)
-        # print(corp)
-        # print("##############")
 
-        # on crée la connexion
-        context = ssl.create_default_context()
-        with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
-            # connexion au compte
-            server.login(from_email_address, from_email_password)
-            # envoi du mail
-            server.sendmail(client_email, to_email, msg)
+        if client_email not in blocked_emails:
+            # on crée la connexion
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
+                # connexion au compte
+                server.login(from_email_address, from_email_password)
+                # envoi du mail
+                server.sendmail(client_email, to_email, msg)
 
-        return template('./html/home', name=home) 
+            return template('./html/home', name=home) 
 
     except:
 
