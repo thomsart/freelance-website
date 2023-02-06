@@ -5,6 +5,7 @@ This module is use to execute the server of the site www.thomsart.tech """
 
 
 import smtplib, ssl
+import json
 
 from bottle import Bottle, route, static_file, template, run, get, post, request, response
 
@@ -40,18 +41,19 @@ def return_static(filename: str):
     else:
         print(f"This file {filename} is unknow...")
 
+
 @app.route('/')
 def home():
     """ The path to return the home template """
 
-    return template('./html/home', name=home)
+    return template('./templates/home', name=home)
 
 
 @app.route('/contact', method='GET')
 def contact():
     """  """
 
-    return template('./html/contact', name=contact)
+    return template('./templates/contact', name=contact)
 
 
 @app.route('/contact', method='POST')
@@ -83,25 +85,39 @@ def contact():
                 # envoi du mail
                 server.sendmail(client_email, to_email, msg)
 
-            return template('./html/home', name=home) 
+            return template('./templates/home', name=home) 
 
     except:
 
-        return template('./html/error')
+        return template('./templates/error')
 
 
-@app.route('/blog')
+@app.route('/blog', method='GET')
 def blog():
     """  """
 
-    return template('./html/blog', name=blog)
+    path = os.path.join("static", "medias", "blog", "feedbacks.json")
 
+    with open(path, "r", encoding="utf-8") as file:
+        dict_file = json.load(file)
+
+    feedbacks = sorted(dict_file.items(), key=lambda x: x[0], reverse=True)
+
+    return template('./templates/blog', feedbacks=feedbacks)
+
+
+@app.route('/blog', method="POST")
+def blog():
+    """  """
+
+    feedback = request.body.get()
+    return template('./templates/blog', name=blog)
 
 @app.route('/mentions_legales')
 def mentions_legales():
     """ The path to return the mentions legales template """
 
-    return template('./html/mentions_legales', name=mentions_legales)
+    return template('./templates/mentions_legales', name=mentions_legales)
 
 
 

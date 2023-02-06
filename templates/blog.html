@@ -1,0 +1,21 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="blog.css">
+</head>
+
+<body>
+    % for item in feedbacks:
+        % for containt in item[1]:
+            <div class="comment">
+                <div class="title"><h4>&nbsp;Le {{item[0][4:]}}/{{item[0][2:4]}}/{{item[0][0:2]}} {{containt["name"]}} de {{containt["company"]}} :&nbsp;</h4></div>
+                <br>
+                <br>
+                <p>&nbsp;&nbsp;&nbsp;"{{containt["comment"]}}"</p>
+            </div>
+        % end
+    % end
+    <a href="/"><h5 class="h2_hover" style="text-align:center">Accueil</h5></a>
+</body>
