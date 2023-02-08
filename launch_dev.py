@@ -6,11 +6,13 @@ This module is use to execute the server of the site www.thomsart.tech """
 
 import smtplib, ssl
 import json
+import datetime
 
-from bottle import Bottle, route, static_file, template, run, get, post, request, response
+from bottle import Bottle, route, static_file, template, run, get, post, request, response, redirect
 
 from const import *
 from credentials import *
+from tools import *
 
 
 
@@ -89,7 +91,7 @@ def contact():
 
     except:
 
-        return template('./templates/error')
+        return template('./templates/error_mail')
 
 
 @app.route('/blog', method='GET')
@@ -97,7 +99,6 @@ def blog():
     """  """
 
     path = os.path.join("static", "medias", "blog", "feedbacks.json")
-
     with open(path, "r", encoding="utf-8") as file:
         dict_file = json.load(file)
 
@@ -106,12 +107,42 @@ def blog():
     return template('./templates/blog', feedbacks=feedbacks)
 
 
-@app.route('/blog', method="POST")
-def blog():
+@app.route('/comment', method="GET")
+def comment():
     """  """
 
-    feedback = request.body.get()
-    return template('./templates/blog', name=blog)
+    return template('./templates/comment', name=comment)
+
+
+@app.route('/comment', method="POST")
+def comment():
+    """  """
+
+    datas = {
+        "name": str(request.forms.getunicode('name')),
+        "company": str(request.forms.getunicode('company')),
+        "comment": str(request.forms.getunicode('comment')),
+        "link": str(request.forms.getunicode('link'))
+    }
+
+    today = str(datetime.date.today())
+
+    copy = load_feedbacks()
+
+    if today in copy:
+        copy[today].append(datas)
+    else:
+        copy[today] = [datas]
+        print(copy)
+
+    if add_feedback(copy):
+
+        return redirect('/blog')
+
+    else:
+
+        return template('./templates/error_comment', name=comment)
+
 
 @app.route('/mentions_legales')
 def mentions_legales():

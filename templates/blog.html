@@ -7,15 +7,21 @@
 </head>
 
 <body>
+
+    <a href="/comment"><h5 class="h2_hover" style="text-align:center">Ajoute un commentaire</h5></a>
+
     % for item in feedbacks:
         % for containt in item[1]:
             <div class="comment">
-                <div class="title"><h4>&nbsp;Le {{item[0][4:]}}/{{item[0][2:4]}}/{{item[0][0:2]}} {{containt["name"]}} de {{containt["company"]}} :&nbsp;</h4></div>
-                <br>
-                <br>
-                <p>&nbsp;&nbsp;&nbsp;"{{containt["comment"]}}"</p>
+                <div class="title"><h4>&nbsp;Le {{item[0][8:]}}/{{item[0][5:7]}}/{{item[0][2:4]}} {{containt["name"]}} de {{containt["company"]}} :&nbsp;</h4></div>
+                <br><br>
+                <p>&nbsp;&nbsp;&nbsp;" {{containt["comment"]}} "</p>
+                % if containt['link'] != "":
+                    <a class="footer-a" href="https://{{containt['link']}}" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{containt['link']}}</a>
+                % end
             </div>
         % end
     % end
+
     <a href="/"><h5 class="h2_hover" style="text-align:center">Accueil</h5></a>
 </body>

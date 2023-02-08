@@ -1,13 +1,1 @@
-{
-    "201201": [
-        {"name": "Joe", "company": "Psychoid", "comment": "J'avais besoin d'un bon guitariste... j'en ai tjrs besoin."}
-    ],
-    "220105": [
-        {"name": "George", "company": "ACME", "comment": "Thomas est un developpeur hors pair il m'as bleuffé tant dans son analyse que dans son éxécurtion..."}
-    ], 
-    "210105": [
-        {"name": "Marc", "company": "Carglass", "comment": "Thomas est un sale con..."},
-        {"name": "Isabelle", "company": "Sextoys", "comment": "Thomas ferai mieux de ne pas mélanger travail et plaisir !"},
-        {"name": "Julie", "company": "Immotech", "comment": "Thomas sait se servir de sa b*** ce qui est plutot rare de nos jours."}
-    ]
-}
+{}

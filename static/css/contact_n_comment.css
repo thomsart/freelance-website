@@ -1,3 +1,7 @@
+body {
+    margin-top: 3rem;
+}
+
 .space {
     height: 1rem;
 }
@@ -50,7 +54,7 @@ input, textarea, button {
     }
 }
 
-#emailValue.empty, #jobValue.empty {
+#emailValue.empty, #jobValue.empty, #nameValue.empty, #companyValue.empty, #commentValue.empty {
     border: solid red 1px;
     animation: shake 0.3s ease-in-out;
 }
