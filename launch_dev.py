@@ -1,19 +1,27 @@
-""" !/usr/bin/env python3
-    -*- coding: utf-8 -*-
+# !/usr/bin/env python3
+# coding: utf-8
 
-This module is use to execute the server of the site www.thomsart.tech """
+""" 
+This module is use to execute the server of the site www.thomsart.tech
+"""
 
-
+import os
 import smtplib, ssl
 import json
 import datetime
 
 from bottle import Bottle, route, static_file, template, run, get, post, request, response, redirect
 
-from const import *
-from credentials import *
-from tools import *
-
+from const import (
+    css_root, css,
+    js_root, js,
+    font_text_root, font_text,
+    font_title_root, font_title,
+    icon_root, icon,
+    photo_root, photo
+)
+from credentials import from_email_address, from_email_password, to_email
+from tools import load_feedbacks, add_feedback, is_valid_form
 
 
 app = Bottle()
@@ -60,38 +68,42 @@ def contact():
 
 @app.route('/contact', method='POST')
 def contact():
-    """  """
+    """
+    This view retrieves all datas from contact form
+    """
 
-    client_email = str(request.forms.getunicode('email'))
+    email = str(request.forms.getunicode('email'))
     job = str(request.forms.getunicode('job'))
     link = str(request.forms.getunicode('link'))
 
-    msg = f"""\n
-        From: {client_email}\n
-        Job: {job}\n
-        Link: {link}"""
+    if is_valid_form(email=email, job=job, link=link):
 
-    msg = bytes(msg, 'utf-8')
-    # on rentre les renseignements pris sur le site du fournisseur
-    smtp_address = 'smtp.gmail.com'
-    smtp_port = 465
+        msg = f"""\n
+            From: {email}\n
+            Job: {job}\n
+            Link: {link}"""
 
-    try:
+        msg = bytes(msg, 'utf-8')
+        # on rentre les renseignements pris sur le site du fournisseur
+        smtp_address = 'smtp.gmail.com'
+        smtp_port = 465
 
-        if client_email not in blocked_emails:
+        try:
             # on crée la connexion
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL(smtp_address, smtp_port, context=context) as server:
                 # connexion au compte
                 server.login(from_email_address, from_email_password)
                 # envoi du mail
-                server.sendmail(client_email, to_email, msg)
+                server.sendmail(email, to_email, msg)
 
-            return template('./templates/home', name=home) 
+                return template('./templates/home', name=home) 
 
-    except:
+        except:
+            return template('./templates/error_mail')
 
-        return template('./templates/error_mail')
+    else:
+        pass
 
 
 @app.route('/blog', method='GET')

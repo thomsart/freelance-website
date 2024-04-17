@@ -21,3 +21,10 @@ icon = [f for f in os.listdir(icon_root) if os.path.isfile(os.path.join(icon_roo
 
 photo_root = os.path.join("static", "medias", "photo")
 photo = [f for f in os.listdir(photo_root) if os.path.isfile(os.path.join(photo_root, f))]
+
+UNDESIRED_WORDS = [
+    "SEO", "Seo", "seo", "Hi", "hi","Are", "are", "You", "you", "We", "we", "To", "to", 
+    "Hola", "Wilkomenn",
+    "Ո", "ղ", "ջ", "ն", "з", "д", "й",
+    "https://", "http://",
+    ]

@@ -1,6 +1,7 @@
 import os
 import json
 
+from const import UNDESIRED_WORDS
 
 
 def load_feedbacks():
@@ -30,3 +31,25 @@ def add_feedback(new_version: dict) -> bool:
 
     except:
         return False
+
+
+def is_valid_form(email, job, link):
+    """
+    This functionn allows to filtre all shity emails.
+    """
+
+    if email==None or job==None:
+        return False
+
+    if link!="None":
+        if "https//" not in link:
+            return False
+
+    if len(job) < 50:
+        return False
+
+    for word in UNDESIRED_WORDS:
+        if word in email:
+            return False
+
+    return True
