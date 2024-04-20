@@ -12,58 +12,32 @@ import datetime
 
 from bottle import Bottle, route, static_file, template, run, get, post, request, response, redirect
 
-from const import (
-    css_root, css,
-    js_root, js,
-    font_text_root, font_text,
-    font_title_root, font_title,
-    icon_root, icon,
-    photo_root, photo
-)
 from credentials import from_email_address, from_email_password, to_email
-from tools import load_feedbacks, add_feedback, is_valid_form
+from tools import load_file, load_feedbacks, add_feedback, is_valid_form
 
 
 app = Bottle()
 
+
 @app.route('/<filename>')
 def return_static(filename: str):
-    """ All paths to return static files """
+    """ Path to return static files """
 
-    if str(filename) in css:
-        return static_file(filename, root=css_root)
-
-    elif str(filename) in js:
-        return static_file(filename, root=js_root)
-
-    elif str(filename) in font_title:
-        return static_file(filename, root=font_title_root)
-    
-    elif str(filename) in font_text:
-        return static_file(filename, root=font_text_root)
-
-    elif str(filename) in icon:
-        return static_file(filename, root=icon_root)
-
-    elif str(filename) in photo:
-        return static_file(filename, root=photo_root)
-
-    else:
-        print(f"This file {filename} is unknow...")
+    return static_file(filename, root=load_file(filename).split(filename)[0])
 
 
 @app.route('/')
 def home():
     """ The path to return the home template """
 
-    return template('./templates/home', name=home)
+    return template(load_file('home.html'), name=home)
 
 
 @app.route('/contact', method='GET')
 def contact():
     """  """
 
-    return template('./templates/contact', name=contact)
+    return template(load_file('contact.html'), name=contact)
 
 
 @app.route('/contact', method='POST')
@@ -97,33 +71,32 @@ def contact():
                 # envoi du mail
                 server.sendmail(email, to_email, msg)
 
-                return template('./templates/home', name=home) 
+                return redirect('/') 
 
         except:
-            return template('./templates/error_mail')
+            return template(load_file('error_mail.html'))
 
     else:
-        pass
+        return template(load_file('error_mail.html'))
 
 
 @app.route('/blog', method='GET')
 def blog():
     """  """
 
-    path = os.path.join("static", "medias", "blog", "feedbacks.json")
-    with open(path, "r", encoding="utf-8") as file:
+    with open(load_file("feedbacks.json"), "r", encoding="utf-8") as file:
         dict_file = json.load(file)
 
     feedbacks = sorted(dict_file.items(), key=lambda x: x[0], reverse=True)
 
-    return template('./templates/blog', feedbacks=feedbacks)
+    return template(load_file("blog.html"), feedbacks=feedbacks)
 
 
 @app.route('/comment', method="GET")
 def comment():
     """  """
 
-    return template('./templates/comment', name=comment)
+    return template(load_file("comment.html"), name=comment)
 
 
 @app.route('/comment', method="POST")
@@ -153,14 +126,14 @@ def comment():
 
     else:
 
-        return template('./templates/error_comment', name=comment)
+        return template(load_file("error_comment.html"), name=comment)
 
 
 @app.route('/mentions_legales')
 def mentions_legales():
     """ The path to return the mentions legales template """
 
-    return template('./templates/mentions_legales', name=mentions_legales)
+    return template(load_file("mentions_legales.html"), name=mentions_legales)
 
 
 
