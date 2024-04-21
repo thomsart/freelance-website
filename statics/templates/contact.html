@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="base.css">
+        <link rel="stylesheet" href="contact_n_comment.css">
+    </head>
+
+    <div class="space"></div>
+
+    <h2>Contactez-moi</h2>
+    <form id="contactForm" method="post">
+        <label for="email"><h6>Votre Email</h6></label>
+        <input name="email" id="emailValue" type="text" maxlength="255">
+        <div class="space"></div>
+        <label for="job"><h6>Votre demande</h6></label>
+        <textarea name="job" id="jobValue" maxlength="500" placeholder="Afin de filter les Bots le message ne sera pas envoye si un lien est mis dans ce champ, merci de le mettre dans le champ adequat..."></textarea>
+        <div class="space"></div>
+        <label for="link"><h6>Lien (facultatif)</h6></label>
+        <input name="link" maxlength="255">
+        <div class="space"></div>
+        <button type="submit"><h6>Envoyer</h6></button>
+    </form>
+
+    <div class="space"></div>
+    <a href="/"><h6 class="h2_hover" style="text-align:center">Accueil</h6></a>
+
+    <script src="form.js"></script>
+
+</html>
