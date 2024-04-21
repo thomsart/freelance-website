@@ -13,37 +13,34 @@ import datetime
 from bottle import Bottle, route, static_file, template, run, get, post, request, response, redirect
 
 from credentials import from_email_address, from_email_password, to_email
-from tools import load_file, load_feedbacks, add_feedback, is_valid_form
-
+from tools import return_file_path, load_feedbacks, add_feedback, is_valid_form
+from const import URLS
 
 app = Bottle()
 
 
-@app.route('/<filename>')
-def return_static(filename: str):
-    """ Path to return static files """
-
-    return static_file(filename, root=load_file(filename).split(filename)[0])
-
-
-@app.route('/')
+@app.route(URLS['home'], method="GET", name='home')
 def home():
-    """ The path to return the home template """
+    """
+    View for home.
+    """
 
-    return template(load_file('home.html'), name=home)
-
-
-@app.route('/contact', method='GET')
-def contact():
-    """  """
-
-    return template(load_file('contact.html'), name=contact)
+    return template(return_file_path('home.html'))
 
 
-@app.route('/contact', method='POST')
+@app.route(URLS['contact'], method="GET", name="contact")
 def contact():
     """
-    This view retrieves all datas from contact form
+    View to get the contact form.
+    """
+
+    return template(return_file_path('contact.html'))
+
+
+@app.route(URLS['contact'], method="POST",name="contact")
+def contact():
+    """
+    View to post contact form.
     """
 
     email = str(request.forms.getunicode('email'))
@@ -71,37 +68,41 @@ def contact():
                 # envoi du mail
                 server.sendmail(email, to_email, msg)
 
-                return redirect('/') 
-
+                return redirect(URLS['home']) 
         except:
-            return template(load_file('error_mail.html'))
-
+            return template(return_file_path('error_mail.html'))
     else:
-        return template(load_file('error_mail.html'))
+        return template(return_file_path('error_mail.html'))
 
 
-@app.route('/blog', method='GET')
+@app.route(URLS['blog'], method='GET', name="blog")
 def blog():
-    """  """
+    """
+    View to render the blog.
+    """
 
-    with open(load_file("feedbacks.json"), "r", encoding="utf-8") as file:
+    with open(return_file_path("feedbacks.json"), "r", encoding="utf-8") as file:
         dict_file = json.load(file)
 
     feedbacks = sorted(dict_file.items(), key=lambda x: x[0], reverse=True)
 
-    return template(load_file("blog.html"), feedbacks=feedbacks)
+    return template(return_file_path("blog.html"), feedbacks=feedbacks)
 
 
-@app.route('/comment', method="GET")
+@app.route(URLS['comment'], method="GET", name='comment')
 def comment():
-    """  """
+    """
+    The view to retrieve comments for the Blog.
+    """
 
-    return template(load_file("comment.html"), name=comment)
+    return template(return_file_path("comment.html"))
 
 
-@app.route('/comment', method="POST")
+@app.route(URLS['comment'], method="POST", name='comment')
 def comment():
-    """  """
+    """
+    The view to leave a comment on the Blog.
+    """
 
     datas = {
         "name": str(request.forms.getunicode('name')),
@@ -109,32 +110,37 @@ def comment():
         "comment": str(request.forms.getunicode('comment')),
         "link": str(request.forms.getunicode('link'))
     }
-
     today = str(datetime.date.today())
-
     copy = load_feedbacks()
 
     if today in copy:
         copy[today].append(datas)
     else:
         copy[today] = [datas]
-        print(copy)
 
     if add_feedback(copy):
-
-        return redirect('/blog')
+        return redirect(URLS['blog'])
 
     else:
+        return template(return_file_path("error_comment.html"))
 
-        return template(load_file("error_comment.html"), name=comment)
 
-
-@app.route('/mentions_legales')
+@app.route(URLS['mentions_legales'], method="GET", name='mentions_legales')
 def mentions_legales():
-    """ The path to return the mentions legales template """
+    """
+    View for the mentions legales.
+    """
 
-    return template(load_file("mentions_legales.html"), name=mentions_legales)
+    return template(return_file_path("mentions_legales.html"))
 
+
+@app.route(URLS['static'], method="GET")
+def return_static(filename: str):
+    """
+    View for the static files.
+    """
+
+    return static_file(filename, root=return_file_path(filename).split(filename)[0])
 
 
 if __name__ == '__main__':

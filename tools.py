@@ -4,7 +4,7 @@ import json
 from const import UNDESIRED_WORDS
 
 
-def load_file(file_name: str) -> str:
+def return_file_path(file_name: str) -> str:
     """
     This function returned the complete path since the folder 'statics'
     of a given file, if its not found it returned an error message.
@@ -18,7 +18,7 @@ def load_file(file_name: str) -> str:
 def load_feedbacks():
     """  """
 
-    json_file = open(load_file("feedbacks.json"))
+    json_file = open(return_file_path("feedbacks.json"))
     copy = {}
     js = json_file.read()
     data = json.loads(js)
@@ -31,7 +31,7 @@ def add_feedback(new_version: dict) -> bool:
     """  """
 
     try:
-        with open(load_file("feedbacks.json"), "w", encoding="utf-8") as new:
+        with open(return_file_path("feedbacks.json"), "w", encoding="utf-8") as new:
             json.dump(new_version, new)
 
         return True
